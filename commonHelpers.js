@@ -1,0 +1,10 @@
+import{i as a}from"./assets/vendor-2f655b0e.js";(function(){const s=document.createElement("link").relList;if(s&&s.supports&&s.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))i(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const o of t.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&i(o)}).observe(document,{childList:!0,subtree:!0});function n(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function i(e){if(e.ep)return;e.ep=!0;const t=n(e);fetch(e.href,t)}})();const u=document.querySelector(".form");document.querySelector(".btn");document.querySelector(".input");const m=document.querySelector(".gallery");function l(r){return fetch(`https://pixabay.com/api/?key=44806225-40e07737f22f709bd193bb0f7&q=${r}%image_type=photo&orientation=horizontal&safesearch=${!0}`).then(o=>{if(!o.ok)throw new Error("no match item");return o.json()})}u.addEventListener("submit",g);function g(r){r.preventDefault();const n=r.currentTarget.elements.query.value.toLowerCase();n.length<=0&&a.show({backgroundColor:"#ef4040",messageColor:"#fff",messageSize:"16px",position:"topRight",message:"Please write something in the search field"}),l(n).then(h).catch(p)}function p(r){a.error({backgroundColor:"#ef4040",messageColor:"#fff",messageSize:"16px",position:"topRight",message:"Sorry, there are no images matching your search query. Please try again!"})}function h({webformatURL:r,largeImageURL:s,tags:n,likes:i,views:e,comments:t,downloads:o}){l().then(c=>console.log(c.hits)).catch(c=>console.error(c));const f=`
+  <li class="item">
+  <a class="gallery-link" href="${s}">
+   <img src="${r}" alt="${n}" class="img-class">
+   <p class="img-text">Likes:${i}</p>
+   <p class="img-text">Views:${e}</p>
+   <p class="img-text">Comments:${t}</p>
+   <p class="img-text">Downloads:${o}</p>
+  </li>`;m.innerHTML=f}
+//# sourceMappingURL=commonHelpers.js.map
