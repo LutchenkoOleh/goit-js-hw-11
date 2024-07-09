@@ -1,5 +1,6 @@
 import iziToast from "izitoast";
 import SimpleLightbox from "simplelightbox";
+import { searchImg } from './pixabay-api'
 
 
 const form = document.querySelector('.form');
@@ -8,26 +9,7 @@ const input = document.querySelector('.input')
 const container = document.querySelector('.gallery')
 
 
-const API_KEY = '44806225-40e07737f22f709bd193bb0f7';
-const URL = `https://pixabay.com/api/?key=${API_KEY}`;
-const imageType = 'photo';
-const orientation = 'horizontal';
-const safeSearch = true;
 
-
-function searchImg(query) {
-
-
-  return fetch(`${URL}&q=${query}&image_type=${imageType}&orientation=${orientation}&safesearch=${safeSearch}`)
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error('no match item')
-      }
-      return res.json()
-    })
-
-
-}
 
 form.addEventListener("submit", handelSearch);
 
@@ -46,10 +28,12 @@ function handelSearch(e) {
     })
   }
 
+
   searchImg(queryValue)
     .then((data) => {
       const results = data.hits;
       const totalRes = data.totalHits;
+
       if (totalRes === 0) {
         iziToast.error({
           backgroundColor: '#ef4040',
@@ -60,38 +44,38 @@ function handelSearch(e) {
         })
       } else {
         results.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
-          const markup = `
-    <li class="gallery-item">
-      <a class="gallery-link" href="${largeImageURL}"></a>
-      <div class="overlay">
-        <img src="${webformatURL}" alt="${tags}" class="gallery-img">
-        <div class="text-wrap">
-          <p class="img-text">Likes: <span>${likes}</span></p>
-          <p class="img-text">Views: <span>${views}</span></p>
-          <p class="img-text">Comments: <span>${comments}</span></p>
-          <p class="img-text">Downloads: <span>${downloads}</span></p>
-        </div>
-      </div>
-    </li>`
+          const markup =
+            `<li class="gallery-item">
+              <a class="gallery-link" href="${largeImageURL}">
+              <img src="${webformatURL}" alt="${tags}" class="gallery-img">
+              </a>
+                <div class="text-wrap">
+                  <p class="img-text">Likes <span class="img-text-span">${likes}</span></p>
+                  <p class="img-text">Views <span class="img-text-span">${views}</span></p>
+                  <p class="img-text">Comments <span class="img-text-span">${comments}</span></p>
+                  <p class="img-text">Downloads <span class="img-text-span">${downloads}</span></p>
+                </div>
+            </li>`
 
           container.insertAdjacentHTML('afterbegin', markup);
 
+
+          let galleryShow = new SimpleLightbox('.gallery a', {
+            captions: true,
+            captionType: 'attr',
+            captionsData: 'alt',
+            captionPosition: 'bottom',
+            captionDelay: 250,
+          });
+          galleryShow.on('show.simplelightbox', function () {
+          });
+          galleryShow.refresh();
+
+          form.reset();
         })
-
-        let galleryShow = new SimpleLightbox('.gallery a', {
-          captions: true,
-          captionType: 'attr',
-          captionsData: 'alt',
-          captionPosition: 'bottom',
-          captionDelay: 250,
-        });
-        galleryShow.on('show.simplelightbox', function () {
-
-        });
-
       }
-
     })
+
     .catch((err) => {
       console.log(err)
     })
@@ -99,22 +83,11 @@ function handelSearch(e) {
 
 
 
-// function renderImg({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) {
 
-//   const markup = `
-//   <ul class="list-img">
-//    <li class="item">
-//     <a class="gallery-link" href="${largeImageURL}">
-//     <img src="${webformatURL}" alt="${tags}" class="img-class">
-//     <p class="img-text">Likes:${likes}</p>
-//     <p class="img-text">Views:${views}</p>
-//     <p class="img-text">Comments:${comments}</p>
-//     <p class="img-text">Downloads:${downloads}</p>
-//    </li>
-//   </ul>`
 
-//   container.innerHTML = markup;
-// }
+
+
+
 
 
 
