@@ -25,10 +25,11 @@ export function renderImg(webformatURL, largeImageURL, tags, likes, views, comme
     captionPosition: 'bottom',
     captionDelay: 250,
   });
+
   galleryShow.on('show.simplelightbox', function () {
   });
 
-
+  galleryShow.refresh();
 
 }
 

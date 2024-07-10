@@ -1,6 +1,6 @@
 import './js/render-functions'
 import './js/pixabay-api'
-import SimpleLightbox from "simplelightbox";
+
 
 import iziToast from "izitoast";
 import { searchImg } from './js/pixabay-api'
@@ -9,21 +9,12 @@ import { renderImg } from './js/render-functions'
 const spin = document.querySelector('.loader')
 spin.style.opacity = 0;
 
-
-const btn = document.querySelector('.btn');
-btn.addEventListener('click', handleClick)
-
-function handleClick() {
-
-  spin.style.opacity = 1;
-}
-
-
 const form = document.querySelector('.form');
 form.addEventListener("submit", handelSearch);
 
 function handelSearch(e) {
   e.preventDefault();
+  spin.style.opacity = 1;
 
   const formTarget = e.currentTarget;
   const queryValue = formTarget.elements.query.value.toLowerCase();
@@ -40,8 +31,8 @@ function handelSearch(e) {
     return;
   }
 
-
   setTimeout(() => {
+
     searchImg(queryValue)
       .then(returnImg)
       .catch(fetchError)
@@ -52,6 +43,7 @@ function handelSearch(e) {
 
 
 function returnImg(data) {
+
   const results = data.hits;
   const totalRes = data.totalHits;
 
