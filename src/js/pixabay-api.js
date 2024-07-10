@@ -1,4 +1,4 @@
-// import { createLogger } from "vite";
+
 
 export function searchImg(query) {
 
