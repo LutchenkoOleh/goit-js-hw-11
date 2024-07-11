@@ -29,7 +29,7 @@ export function renderImg(webformatURL, largeImageURL, tags, likes, views, comme
   galleryShow.on('show.simplelightbox', function () {
   });
 
-  galleryShow.refresh();
+
 
 }
 

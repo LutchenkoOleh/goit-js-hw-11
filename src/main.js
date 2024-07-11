@@ -1,5 +1,6 @@
 import './js/render-functions'
 import './js/pixabay-api'
+import SimpleLightbox from "simplelightbox";
 
 
 import iziToast from "izitoast";
@@ -39,6 +40,7 @@ function handelSearch(e) {
   }, 1000)
 
   form.reset();
+
 }
 
 
@@ -58,7 +60,6 @@ function returnImg(data) {
   } else {
     results.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
       renderImg(webformatURL, largeImageURL, tags, likes, views, comments, downloads);
-
     })
   }
 
