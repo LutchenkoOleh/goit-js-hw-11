@@ -17,20 +17,6 @@ export function renderImg(webformatURL, largeImageURL, tags, likes, views, comme
 
   container.insertAdjacentHTML('afterbegin', markup);
 
-
-  let galleryShow = new SimpleLightbox('.gallery a', {
-    captions: true,
-    captionType: 'attr',
-    captionsData: 'alt',
-    captionPosition: 'bottom',
-    captionDelay: 250,
-  });
-
-  galleryShow.on('show.simplelightbox', function () {
-  });
-
-
-
 }
 
 

@@ -17,6 +17,7 @@ function handelSearch(e) {
   e.preventDefault();
   spin.style.opacity = 1;
 
+
   const formTarget = e.currentTarget;
   const queryValue = formTarget.elements.query.value.toLowerCase();
   if (queryValue.length <= 0) {
@@ -32,13 +33,11 @@ function handelSearch(e) {
     return;
   }
 
-  setTimeout(() => {
+  searchImg(queryValue)
+    .then(returnImg)
+    .catch(fetchError)
 
-    searchImg(queryValue)
-      .then(returnImg)
-      .catch(fetchError)
-  }, 1000)
-
+  container.innerHTML = '';
   form.reset();
 
 }
@@ -62,6 +61,21 @@ function returnImg(data) {
       renderImg(webformatURL, largeImageURL, tags, likes, views, comments, downloads);
     })
   }
+
+
+  let galleryShow = new SimpleLightbox('.gallery a', {
+    captions: true,
+    captionType: 'attr',
+    captionsData: 'alt',
+    captionPosition: 'bottom',
+    captionDelay: 250,
+  });
+
+  galleryShow.on('show.simplelightbox', function () {
+  });
+
+  galleryShow.refresh()
+
 
   spin.style.opacity = '0';
 }
