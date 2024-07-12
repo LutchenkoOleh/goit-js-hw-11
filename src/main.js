@@ -14,6 +14,8 @@ const form = document.querySelector('.form');
 form.addEventListener("submit", handelSearch);
 
 function handelSearch(e) {
+  document.querySelector('.gallery').innerHTML = "";
+
   e.preventDefault();
   spin.style.opacity = 1;
 
@@ -37,14 +39,12 @@ function handelSearch(e) {
     .then(returnImg)
     .catch(fetchError)
 
-  container.innerHTML = '';
   form.reset();
 
 }
 
 
 function returnImg(data) {
-
   const results = data.hits;
   const totalRes = data.totalHits;
 

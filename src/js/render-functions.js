@@ -1,7 +1,8 @@
-import SimpleLightbox from "simplelightbox";
-const container = document.querySelector('.gallery')
+
 
 export function renderImg(webformatURL, largeImageURL, tags, likes, views, comments, downloads) {
+
+  const container = document.querySelector('.gallery')
   const markup =
     `<li class="gallery-item">
       <a class="gallery-link" href="${largeImageURL}">

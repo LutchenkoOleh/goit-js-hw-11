@@ -1,5 +1,4 @@
 
-
 export function searchImg(query) {
 
   const API_KEY = '44806225-40e07737f22f709bd193bb0f7';
