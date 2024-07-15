@@ -21,7 +21,7 @@ function handelSearch(e) {
 
 
   const formTarget = e.currentTarget;
-  const queryValue = formTarget.elements.query.value.toLowerCase();
+  const queryValue = formTarget.elements.query.value.trim().toLowerCase();
   if (queryValue.length <= 0) {
     iziToast.show({
       backgroundColor: '#ef4040',
@@ -43,6 +43,14 @@ function handelSearch(e) {
 
 }
 
+let galleryShow = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionType: 'attr',
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+});
+
 
 function returnImg(data) {
   const results = data.hits;
@@ -61,15 +69,6 @@ function returnImg(data) {
       renderImg(webformatURL, largeImageURL, tags, likes, views, comments, downloads);
     })
   }
-
-
-  let galleryShow = new SimpleLightbox('.gallery a', {
-    captions: true,
-    captionType: 'attr',
-    captionsData: 'alt',
-    captionPosition: 'bottom',
-    captionDelay: 250,
-  });
 
   galleryShow.on('show.simplelightbox', function () {
   });
